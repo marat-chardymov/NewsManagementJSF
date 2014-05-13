@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.epam.news.model.News" abstract="true">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">NEWS_SEQ</param>
+			</generator>
+		</id>
+			<property name="title" type="string" />
+			<property name="brief" type="string" />
+			<property name="content" type="string" />
+			<property name="createdAt" type="java.sql.Date" column="CREATED_AT" />		
+	</class>
+	<query name="DELETE">
+        <![CDATA[DELETE FROM News news WHERE news.id= :id]]>
+	</query>
+	<query name="DELETE_LIST">
+        <![CDATA[DELETE News news WHERE news.id IN (:idList)]]>
+	</query>
+	<query name="FIND_ALL">
+        <![CDATA[SELECT n FROM News n ORDER BY n.createdAt DESC]]>
+	</query>
+</hibernate-mapping>
