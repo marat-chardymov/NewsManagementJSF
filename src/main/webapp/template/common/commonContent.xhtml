@@ -5,31 +5,41 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<body>
-	<ui:composition>
 
-		<h:dataTable value="#{newsBean.newsList}" var="n">
 
-			<h:column>
-				<f:facet name="header">
-    				News ID
-    			</f:facet>
-    				#{n.id}
-    		</h:column>
-			<h:column>
-				<f:facet name="header">
-    				Title
-				</f:facet>
-    				#{n.title}
-    		</h:column>
-			<h:column>
-				<f:facet name="header">
-    				Brief
-				</f:facet>
-    				#{n.brief}
-    		</h:column>
-		</h:dataTable>
 
-	</ui:composition>
-</body>
+<ui:composition>
+	<h:head></h:head>
+	<h:outputStylesheet library="css" name="newsList.css" />
+	<div class="breadcrumb">
+		<a href="/newsAction.do?method=list">News</a> >> News list
+	</div>
+
+	<h:form id="deleteForm">
+
+		<ui:repeat var="news" value="#{newsBean.newsList}" varStatus="status">
+				<div class="newsBlock">
+					<span>
+						<h2 class="title">#{news.title}</h2> <span class="date">
+							#{news.createdAt} </span>
+					</span>
+					<p class="brief">#{news.brief}</p>
+					<div class="RUDbuttons">
+						<h:outputLink value="amazon.com" styleClass="listBtn">
+							<h:outputText value="View" />
+							<f:param name="news.id" value="#{news.id}" />
+						</h:outputLink>
+						<h:outputLink value="amazon.com" styleClass="listBtn">
+							<h:outputText value="Edit" />
+							<f:param name="news.id" value="#{news.id}" />
+						</h:outputLink>
+						<h:selectBooleanCheckbox value="#{newsBean.selectedItems[news.id]}" />
+					</div>
+				</div>
+		</ui:repeat>
+
+		<h:commandButton id="selectedItems" value="delete" action="#{newsBean.deleteSelected}"></h:commandButton>
+	</h:form>
+
+</ui:composition>
 </html>

@@ -24,4 +24,11 @@ public class JPANewsDAO implements INewsDAO {
         Query query = em.createNamedQuery("FIND_ALL");
         return query.getResultList();
     }
+    
+    @Override
+    public void deleteList(List<Integer> idList) {
+        Query query = em.createNamedQuery("DELETE_LIST");
+        query.setParameter("idList", idList);
+        query.executeUpdate();
+    }
 }

@@ -2,7 +2,9 @@ package com.epam.news;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,6 +25,8 @@ public class NewsBean implements Serializable {
 
 	List<News> newsList = new ArrayList<News>();
 
+	private Map<Integer, Boolean> selectedItems = new HashMap<Integer, Boolean>();
+
 	public void setNewsBo(INewsBo newsBo) {
 		this.newsBo = newsBo;
 	}
@@ -33,6 +37,19 @@ public class NewsBean implements Serializable {
 
 	public List<News> getNewsList() {
 		return newsBo.findAll();
+	}
+
+	public Map<Integer, Boolean> getSelectedItems() {
+		return selectedItems;
+	}
+
+	public void setSelectedItems(Map<Integer, Boolean> selectedItems) {
+		this.selectedItems = selectedItems;
+	}
+	
+	public void deleteSelected(){
+		System.out.println("asdf");
+		newsBo.deleteSelected(selectedItems);
 	}
 
 }

@@ -24,7 +24,7 @@ h2.title {
     word-break: break-all;
 }
 
-#deleteBtn {
+deleteForm:selectedItems{
     float: right;
     margin-right: 60px;
 }

@@ -13,7 +13,8 @@ public interface INewsDAO {
 //
 //	public void delete(int id);
 //
-//	public void deleteList(int[] ids);
 
 	public List<News> findAll();
+
+	void deleteList(List<Integer> idList);
 }
